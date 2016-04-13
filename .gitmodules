@@ -1,0 +1,6 @@
+[submodule "Plugin/Froala"]
+	path = Plugin/Froala
+	url = git://github.com/froala/wysiwyg-cake.git
+[submodule "plugins/Migrations"]
+	path = plugins/Migrations
+	url = git@github.com:CakeDC/TinyMCE.git

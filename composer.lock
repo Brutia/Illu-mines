@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c8eee0878b0852c6d5651b334b36d7f",
-    "content-hash": "601fb31c8d0d4504a213a0c837654da4",
+    "hash": "e06d2dd6c0be4b435ec3235d6c365e56",
+    "content-hash": "8694ce3b2d25a0cafc9f252b7d29bc79",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -125,6 +125,51 @@
                 "localization"
             ],
             "time": "2014-08-24 00:00:00"
+        },
+        {
+            "name": "bnware/cakephp-bbcode",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/bnware/bbcode.git",
+                "reference": "a02987aa8c164f71d7bbce05722421e27433d13c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/bnware/bbcode/get/a02987aa8c164f71d7bbce05722421e27433d13c.zip",
+                "reference": "a02987aa8c164f71d7bbce05722421e27433d13c",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.2",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "BBCode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "BNware"
+                }
+            ],
+            "description": "BBCode Parser",
+            "homepage": "http://cakephp.org",
+            "keywords": [
+                "bbcode",
+                "cakephp",
+                "parser"
+            ],
+            "time": "2016-03-23 14:02:12"
         },
         {
             "name": "cakephp/cakephp",
@@ -765,6 +810,52 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-03-04 07:55:57"
+        },
+        {
+            "name": "tinymce/tinymce",
+            "version": "4.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "ee747f1bc97ec8380e7fd8a1ce827be5e735a10b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/ee747f1bc97ec8380e7fd8a1ce827be5e735a10b",
+                "reference": "ee747f1bc97ec8380e7fd8a1ce827be5e735a10b",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "skins/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "http://www.tinymce.com",
+            "keywords": [
+                "editor",
+                "html",
+                "javascript",
+                "richtext",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2016-04-12 13:26:22"
         }
     ],
     "packages-dev": [

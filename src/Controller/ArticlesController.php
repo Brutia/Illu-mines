@@ -7,7 +7,7 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 
 class ArticlesController extends AppController
-{
+{        
 	public function beforeFilter(Event $event){
         parent::beforeFilter($event);
 		$this->LoadModel('Users');
@@ -23,6 +23,7 @@ class ArticlesController extends AppController
     public function view($id = null)
     {
         $article = $this->Articles->get($id);
+        
         $this->set(compact('article'));
     }
     
