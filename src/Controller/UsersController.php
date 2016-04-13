@@ -31,15 +31,33 @@ class UsersController extends AppController
 
     public function add()
     {
+        $this->isAuthorized($this->Auth->user());
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__("L'utilisateur a été sauvegardé."));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             }
             $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
         }
+        $this->set('user', $user);
+    }
+    
+    // src/Controller/ArticlesController.php
+    public function edit($id = null)
+    {
+        $this->isAuthorized($this->Auth->user());
+        $user = $this->Users->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('L\'utilisateur a été mis à jour.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Impossible de mettre à jour l\'utilisateur.'));
+        }
+
         $this->set('user', $user);
     }
     

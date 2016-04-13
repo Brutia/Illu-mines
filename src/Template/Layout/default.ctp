@@ -61,8 +61,36 @@ echo $this->fetch('script');
               <ul class="nav navbar-nav navbar-right">
                   <li>
                     <?php 
-                      if ($this->request->session()->read('Auth.User'))
-                        echo $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => 'logout']);
+                      if ($this->request->session()->read('Auth.User')){
+                    ?>
+                      <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $username ?> <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li>
+                                <?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => 'logout']); ?>
+                            </li>
+                          </ul>
+                      </li>
+                    <?php
+                          if($role == 'admin' || 'author'){
+                    ?>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration du site<span class="caret"></span></a>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                        <?php
+                                            if($role == 'admin')
+                                                echo $this->Html->link('Voir les utilisateurs', ['controller' => 'users', 'action' => 'index']); 
+                                        ?>
+                                    </li>
+                                    <li>
+                                        <?= $this->Html->link('Voir les articles', ['controller' => 'articles', 'action' => 'index']); ?>
+                                    </li>
+                                  </ul>
+                              </li>
+                    <?php    
+                          }
+                      }                        
                       else
                         echo $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']); 
                     ?>

@@ -44,13 +44,12 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'loginRedirect' => [
-                'controller' => 'Articles',
-                'action' => 'index'
+                'controller' => 'Pages',
+                'action' => 'home'
             ],
             'logoutRedirect' => [
-                'controller' => 'Articles',
-                'action' => 'index',
-                'home'
+                'controller' => 'Pages',
+                'action' => 'home'
             ]
         ]);
     }
@@ -73,5 +72,19 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'view', 'display']);
+        $this->set('username', $this->Auth->user('username'));
+        $this->set('role', $this->Auth->user('role'));
+    }
+    
+    public function isAuthorized($user)
+    {
+        // Admin peuvent accéder à chaque action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Par défaut refuser
+        $this->Flash->error(__('Vous n\'avez pas les droits pour accéder à cette page.'));
+        return $this->redirect(['controller' => 'pages', 'action' => 'index']);
     }
 }

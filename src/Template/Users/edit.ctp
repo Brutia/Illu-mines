@@ -1,9 +1,9 @@
-<!-- src/Template/Users/add.ctp -->
+<!-- File: src/Template/Users/edit.ctp -->
 
 <div class="container content">
     <div class="row">
         <div class="col-lg-12 page-title">
-            Ajout d'un utilisateur
+            Modification d'un utilisateur
         </div>
     </div>
     
@@ -25,7 +25,7 @@
                     'label' => false, 'div' => false, 'class' => 'form-control'
                 ]) ?>
             </div>
-            <?= $this->Form->button(__('Ajouter'), ['class' => 'btn btn-primary']); ?>
+            <?= $this->Form->button(__('Sauvegarder les changements'), ['class' => 'btn btn-primary']); ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

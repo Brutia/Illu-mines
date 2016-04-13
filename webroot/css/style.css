@@ -16,8 +16,23 @@ body{
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-nav > li > a,
-.navbar-default .navbar-nav > li > a:focus{
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover{
     color: white;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover{
+    background-color: rgb(151,4,4);
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover{
+    color: rgb(151,4,4);
+    font-size: 20px;
 }
 
 .footer {
@@ -76,4 +91,26 @@ body{
 .presentation{
     margin-top: 10px;
     padding: 30px;
+}
+
+.page-title{
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.btn-line{
+    margin: 10px;
+}
+
+.input-group{
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.addon-fixed-size{
+    width: 120px;
+}
+
+.form{
+    padding: 20px;
 }
