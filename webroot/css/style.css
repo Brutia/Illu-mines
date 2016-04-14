@@ -67,10 +67,8 @@ body{
 
 .logo{
     position: absolute;
-    max-width: 100px;
-    right: 10%;
-    bottom: 0;
-    z-index: -1;
+    height: 100%;
+    top: 0;
 }
 
 .content{
@@ -113,4 +111,22 @@ body{
 
 .form{
     padding: 20px;
+}
+
+.date{
+    color: #A0A0A0;
+    font-size: 16px;
+}
+
+.article{
+    padding: 20px;
+    text-align: justify;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(141,4,4);
+}
+
+.article img{
+    border: 2px solid white;
+    box-shadow: 0px 0px 5px #515151;
+    max-width: 100%;
 }

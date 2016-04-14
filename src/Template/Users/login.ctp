@@ -1,13 +1,26 @@
 <!-- src/Template/Users/login.ctp -->
 
-<div class="users form">
-<?= $this->Flash->render('auth') ?>
-<?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></legend>
-        <?= $this->Form->input('username') ?>
-        <?= $this->Form->input('password') ?>
-    </fieldset>
-<?= $this->Form->button(__('Se Connecter')); ?>
-<?= $this->Form->end() ?>
+<div class="container content">
+    <div class="row">
+        <div class="col-lg-12 page-title">
+            Se connecter
+        </div>
+    </div>
+    <?= $this->Flash->render('auth') ?>
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 form">
+            <?= $this->Form->create() ?>
+            <div class="input-group">
+                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Username</span>
+                <?= $this->Form->input('username', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Password</span>
+                <?= $this->Form->input('password', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
+            </div>
+            <?= $this->Form->button(__('Se connecter'), ['class' => 'btn btn-primary']); ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
 </div>

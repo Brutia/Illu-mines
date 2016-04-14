@@ -20,6 +20,7 @@
                     <th>Title</th>
                     <th>Created</th>
                     <th>Author</th>
+                    <th>Categorie</th>
                     <th>Action</th>
                 </tr>
 
@@ -32,10 +33,14 @@
                         <?= $this->Html->link($article->title, ['action' => 'view', $article->id]); ?>
                     </td>
                     <td>
-                        <?= $article->created->format(DATE_RFC850) ?>
+                        <?= $article->created->format('F jS, Y') ?>
                     </td>
                     <td>
-                        <?= $users->toArray()[$article->user_id]['username']; ?>
+                        <?= $users->toArray()[$article->user_id-1]['username']; ?>
+                    </td>
+                    <td>
+                        <?= $article->categorie ?>
+                    </td>
                     </td>
                     <td>
                         <div class="btn-group">

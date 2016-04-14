@@ -15,6 +15,13 @@
                 <?= $this->Form->input('title', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
             </div>
             <div class="input-group">
+                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Categorie</span>
+                <?= $this->Form->input('categorie', [
+                    'options' => ['fdls' => 'Fête de la science', 'tap' => 'TAP'],
+                    'label' => false, 'div' => false, 'class' => 'form-control'
+                ]) ?>
+            </div>
+            <div class="input-group">
                 <!-- <span class="input-group-addon addon-fixed-size" id="basic-addon1">Content</span> -->
                 <?= $this->Form->input('body', ['label' => false, 'div' => false, 'class' => 'form-control', 'rows' => '60', 'id' => 'body']) ?>
             </div>
@@ -24,14 +31,11 @@
     </div>
 </div>
 
-<script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>
-<?= $this->Html->script('plugin.js'); ?>
+<script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('body', {
         height: 450,
         language: 'fr',
-        extraPlugins: 'bbcode'
+        removeButtons: 'Flash'
     });
-    
-    CKEDITOR.BBCodeParser();
 </script>

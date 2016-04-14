@@ -77,5 +77,16 @@ class UsersController extends AppController
     {
         return $this->redirect($this->Auth->logout());
     }
-
+    
+        // src/Controller/ArticlesController.php
+    public function delete($id)
+    {
+        $this->isAuthorized($this->Auth->user());
+        
+        $user = $this->Users->get($id);
+        if ($this->Users->delete($user)) {
+            $this->Flash->success(__("L'utilisateur avec l'id: {0} a été supprimé.", h($id)));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 }

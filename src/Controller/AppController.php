@@ -85,6 +85,6 @@ class AppController extends Controller
 
         // Par défaut refuser
         $this->Flash->error(__('Vous n\'avez pas les droits pour accéder à cette page.'));
-        return $this->redirect(['controller' => 'pages', 'action' => 'index']);
+        return $this->redirect(['controller' => 'pages', 'action' => 'home']);
     }
 }

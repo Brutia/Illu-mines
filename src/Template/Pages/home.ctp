@@ -26,8 +26,11 @@ $this->layout = "default";
 
 <div class="container content">
     <div class="row welcome">
-        <div class="col-lg-12 text-center">
+        <div class="col-lg-12 text-center" style="position: relative">
             <p>Bienvenue sur le site d'<span class="name-asso">Illu-Mines</span></p>
+            <?= $this->Html->image('logo.png', ['class' => 'img img-responsive logo hidden-xs']) ?>
+            <?= $this->Html->image('logo.png', ['class' => 'img img-responsive logo hidden-xs',
+                                                'style' => 'right: 0']) ?>
         </div>
     </div>
     

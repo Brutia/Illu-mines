@@ -5,9 +5,15 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Datasource\ConnectionManager;
 
 class ArticlesController extends AppController
 {        
+    public function beforeRender(Event $event)
+    {
+        parent::beforeRender($event);
+        $this->viewBuilder()->helpers(['BBCode']);
+    }
 	public function beforeFilter(Event $event){
         parent::beforeFilter($event);
 		$this->LoadModel('Users');
@@ -50,6 +56,7 @@ class ArticlesController extends AppController
     {
         $this->isAuthorized($this->Auth->user());
         $article = $this->Articles->get($id);
+        
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
@@ -62,12 +69,20 @@ class ArticlesController extends AppController
         $this->set('article', $article);
     }
     
+    public function categorie($cat){
+        $query = $this->Articles->find('all')
+            ->where(['Articles.categorie' => $cat]);
+        
+        $articles = $query->all();
+        
+        $this->set('articles', $articles);
+    }
+    
     // src/Controller/ArticlesController.php
     public function delete($id)
     {
         $this->isAuthorized($this->Auth->user());
-        $this->request->allowMethod(['post', 'delete']);
-
+        
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));

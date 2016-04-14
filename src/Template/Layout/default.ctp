@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title><?= h($this->fetch('title')) ?></title>
+<title>Illu-Mines</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
@@ -56,7 +56,8 @@ echo $this->fetch('script');
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li><a href="#">Link</a></li>
+                <li><?= $this->Html->link('Fête de la science', ['controller' => 'articles', 'action' => 'categorie', 'fdls']) ?></li>
+                <li><?= $this->Html->link('TAP', ['controller' => 'articles', 'action' => 'categorie', 'tap']) ?></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   <li>
