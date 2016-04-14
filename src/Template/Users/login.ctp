@@ -1,4 +1,5 @@
 <!-- src/Template/Users/login.ctp -->
+<?= $this->Flash->render('auth') ?>
 
 <div class="container content">
     <div class="row">
@@ -6,7 +7,6 @@
             Se connecter
         </div>
     </div>
-    <?= $this->Flash->render('auth') ?>
 
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1 form">

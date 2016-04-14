@@ -1,4 +1,5 @@
 <!-- File: src/Template/Users/edit.ctp -->
+<?= $this->Flash->render('auth') ?>
 
 <div class="container content">
     <div class="row">

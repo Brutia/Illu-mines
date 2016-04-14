@@ -1,3 +1,5 @@
+<?= $this->Flash->render('auth') ?>
+
 <div class="container content">
     <div class="row">
         <div class="col-lg-12 page-title">

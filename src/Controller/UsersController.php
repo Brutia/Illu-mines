@@ -36,10 +36,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__("L'utilisateur a été sauvegardé."));
-                return $this->redirect(['action' => 'add']);
+                $this->Flash->success(__("L'utilisateur a été sauvegardé."), ['key' => 'auth']);
+                return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
+            $this->Flash->error(__("Impossible d'ajouter l'utilisateur."), ['key' => 'auth']);
         }
         $this->set('user', $user);
     }
@@ -52,10 +52,10 @@ class UsersController extends AppController
         if ($this->request->is(['post', 'put'])) {
             $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('L\'utilisateur a été mis à jour.'));
+                $this->Flash->success(__('L\'utilisateur a été mis à jour.'), ['key' => 'auth']);
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible de mettre à jour l\'utilisateur.'));
+            $this->Flash->error(__('Impossible de mettre à jour l\'utilisateur.'), ['key' => 'auth']);
         }
 
         $this->set('user', $user);
@@ -69,7 +69,7 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid username or password, try again'), ['key' => 'auth']);
         }
     }
 
@@ -85,7 +85,7 @@ class UsersController extends AppController
         
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__("L'utilisateur avec l'id: {0} a été supprimé.", h($id)));
+            $this->Flash->success(__("L'utilisateur avec l'id: {0} a été supprimé.", h($id)), ['key' => 'auth']);
             return $this->redirect(['action' => 'index']);
         }
     }

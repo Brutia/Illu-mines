@@ -1,4 +1,5 @@
 <!-- File: src/Template/Articles/add.ctp -->
+<?= $this->Flash->render('art') ?>
 
 <div class="container content">
     <div class="row">

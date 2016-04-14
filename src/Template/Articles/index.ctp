@@ -1,4 +1,6 @@
 <!-- File: src/Template/Articles/index.ctp -->
+<?= $this->Flash->render('art') ?>
+
 <div class="container content">
     <div class="row">
         <div class="col-lg-12 page-title">

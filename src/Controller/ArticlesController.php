@@ -43,10 +43,10 @@ class ArticlesController extends AppController
             $article->user_id = $this->Auth->user('id');
             
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Votre article a été sauvegardé.'));
+                $this->Flash->success(__('Votre article a été sauvegardé.'), ['key' => 'art']);
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible d\'ajouter votre article.'));
+            $this->Flash->error(__('Impossible d\'ajouter votre article.'), ['key' => 'art']);
         }
         $this->set('article', $article);
     }
@@ -60,10 +60,10 @@ class ArticlesController extends AppController
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Votre article a été mis à jour.'));
+                $this->Flash->success(__('Votre article a été mis à jour.'), ['key' => 'art']);
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible de mettre à jour votre article.'));
+            $this->Flash->error(__('Impossible de mettre à jour votre article.'), ['key' => 'art']);
         }
 
         $this->set('article', $article);
@@ -85,7 +85,7 @@ class ArticlesController extends AppController
         
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
+            $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)), ['key' => 'art']);
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -94,7 +94,7 @@ class ArticlesController extends AppController
     public function isAuthorized($user)
     {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
-        if ($this->request->action === 'add') {
+        if ($this->request->action === 'add'){
             return true;
         }
 
