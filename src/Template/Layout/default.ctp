@@ -19,6 +19,7 @@
 <head>
 <title>Illu-Mines</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
     
@@ -35,6 +36,7 @@ echo $this->fetch('script');
     
 </head>
     <body>
+        <?= $this->Flash->render() ?>
 
         <!-- If you'd like some sort of menu to
         show up on all of your views, include it here -->

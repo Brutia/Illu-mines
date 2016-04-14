@@ -31,6 +31,4 @@
         height: 450,
         language: 'fr'
     });
-    
-    CKEDITOR.BBCodeParser();
 </script>

@@ -99,7 +99,7 @@ class ArticlesController extends AppController
         }
 
         // Le propriétaire d'un article peut l'éditer et le supprimer
-        if (in_array($this->request->action, ['edit', 'delete'])) {
+        if (in_array($this->request->action, ['edit'])) {
             $articleId = (int)$this->request->params['pass'][0];
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
