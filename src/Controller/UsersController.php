@@ -20,6 +20,7 @@ class UsersController extends AppController
 
      public function index()
      {
+        $this->isAuthorized($this->Auth->user());
         $this->set('users', $this->Users->find('all'));
     }
 
@@ -36,10 +37,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__("L'utilisateur a été sauvegardé."), ['key' => 'auth']);
+                $this->Flash->success(__("L'utilisateur a été sauvegardé."));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__("Impossible d'ajouter l'utilisateur."), ['key' => 'auth']);
+            $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
         }
         $this->set('user', $user);
     }
@@ -49,13 +50,17 @@ class UsersController extends AppController
     {
         $this->isAuthorized($this->Auth->user());
         $user = $this->Users->get($id);
+                
         if ($this->request->is(['post', 'put'])) {
             $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('L\'utilisateur a été mis à jour.'), ['key' => 'auth']);
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('L\'utilisateur a été mis à jour.'));
+                if($this->Auth->user('role') === 'admin')
+                    return $this->redirect(['action' => 'index']);
+                else
+                    return $this->redirect(['controller' => 'pages', 'action' => 'home']);
             }
-            $this->Flash->error(__('Impossible de mettre à jour l\'utilisateur.'), ['key' => 'auth']);
+            $this->Flash->error(__('Impossible de mettre à jour l\'utilisateur.'));
         }
 
         $this->set('user', $user);
@@ -69,7 +74,7 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'), ['key' => 'auth']);
+            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 
@@ -79,14 +84,37 @@ class UsersController extends AppController
     }
     
         // src/Controller/ArticlesController.php
-    public function delete($id)
+    public function delete($id = null)
     {
         $this->isAuthorized($this->Auth->user());
-        
+                
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__("L'utilisateur avec l'id: {0} a été supprimé.", h($id)), ['key' => 'auth']);
+        if ($id != 1) {
+            if($this->Users->delete($user)){
+                $this->Flash->success(__("L'utilisateur avec l'id: {0} a été supprimé.", h($id)));
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        else{
+            $this->Flash->error(__("Tu ne peux pas supprimer cet utilisateur.", h($id)));
             return $this->redirect(['action' => 'index']);
         }
+    }
+    
+    public function isAuthorized($user){
+        
+        if ($this->request->action === 'edit'){
+            $userId = (int)$this->request->params['pass'][0];
+            
+            if( ($userId == 1) && ( (isset($user['id']) && $userId != $user['id']) ) ){
+                $this->Flash->error(__("Tu ne peux pas modifier cet utilisateur.", h($id)));
+                return $this->redirect(['action' => 'index']);
+            }
+            
+            if( ($userId == $user['id']) || ($user['role'] === 'admin') )
+                return true;
+        }
+        
+        return parent::isAuthorized($user);
     }
 }

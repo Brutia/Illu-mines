@@ -1,5 +1,5 @@
 <!-- File: src/Template/Articles/index.ctp -->
-<?= $this->Flash->render('art') ?>
+<?= $this->Flash->render() ?>
 
 <div class="container content">
     <div class="row">
@@ -13,7 +13,7 @@
             <?= $this->Html->link('Ajouter un article', ['action' => 'add'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
-    
+    <?php  ?>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-striped">
@@ -38,7 +38,7 @@
                         <?= $article->created->format('F jS, Y') ?>
                     </td>
                     <td>
-                        <?= $users->toArray()[$article->user_id-1]['username']; ?>
+                        <?php echo $usernameList[$article->user_id] ?>
                     </td>
                     <td>
                         <?= $article->categorie ?>

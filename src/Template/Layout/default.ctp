@@ -67,8 +67,14 @@ echo $this->fetch('script');
                       if ($this->request->session()->read('Auth.User')){
                     ?>
                       <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $username ?> <span class="caret"></span></a>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $user['username'] ?> <span class="caret"></span></a>
                           <ul class="dropdown-menu">
+                            <li>
+                                <?= $this->Html->link('Modifier mon compte', ['controller' => 'users', 
+                                                                              'action' => 'edit',
+                                                                              $user['id']
+                                                                             ]); ?>
+                            </li>
                             <li>
                                 <?= $this->Html->link('Se déconnecter', ['controller' => 'users', 'action' => 'logout']); ?>
                             </li>

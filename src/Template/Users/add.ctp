@@ -1,5 +1,5 @@
 <!-- src/Template/Users/add.ctp -->
-<?= $this->Flash->render('auth') ?>
+<?= $this->Flash->render() ?>
 
 <div class="container content">
     <div class="row">

@@ -21,9 +21,16 @@ class ArticlesController extends AppController
     
     public function index()
     {
+        $this->isAuthorized($this->Auth->user());
+        
         $articles = $this->Articles->find('all');
         $users = $this->Users->find('all');
-        $this->set(compact('articles', 'users'));
+        
+        foreach($users as $user){
+            $usernameList[$user->id] = $user->username;
+        }
+        
+        $this->set(compact('articles', 'usernameList'));
     }
     
     public function view($id = null)
@@ -43,10 +50,10 @@ class ArticlesController extends AppController
             $article->user_id = $this->Auth->user('id');
             
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Votre article a été sauvegardé.'), ['key' => 'art']);
+                $this->Flash->success(__('Votre article a été sauvegardé.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible d\'ajouter votre article.'), ['key' => 'art']);
+            $this->Flash->error(__('Impossible d\'ajouter votre article.'));
         }
         $this->set('article', $article);
     }
@@ -60,10 +67,10 @@ class ArticlesController extends AppController
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Votre article a été mis à jour.'), ['key' => 'art']);
+                $this->Flash->success(__('Votre article a été mis à jour.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Impossible de mettre à jour votre article.'), ['key' => 'art']);
+            $this->Flash->error(__('Impossible de mettre à jour votre article.'));
         }
 
         $this->set('article', $article);
@@ -81,11 +88,17 @@ class ArticlesController extends AppController
     // src/Controller/ArticlesController.php
     public function delete($id)
     {
-        $this->isAuthorized($this->Auth->user());
+        //$this->isAuthorized($this->Auth->user());
         
-        $article = $this->Articles->get($id);
-        if ($this->Articles->delete($article)) {
-            $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)), ['key' => 'art']);
+        if( isset($user['role']) && in_array($user['role'], ['admin']) ){
+            $article = $this->Articles->get($id);
+            if ($this->Articles->delete($article)) {
+                $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        else{
+            $this->Flash->error(__("Vous ne pouvez pas supprimer cet article.", h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -93,16 +106,22 @@ class ArticlesController extends AppController
     // src/Controller/ArticlesController.php
     public function isAuthorized($user)
     {
-        // Tous les utilisateurs enregistrés peuvent ajouter des articles
-        if ($this->request->action === 'add'){
-            return true;
-        }
-
-        // Le propriétaire d'un article peut l'éditer et le supprimer
-        if (in_array($this->request->action, ['edit'])) {
-            $articleId = (int)$this->request->params['pass'][0];
-            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
+        if( isset($user['role']) && in_array($user['role'], ['author', 'admin']) ){
+            // Tous les utilisateurs enregistrés peuvent ajouter des articles
+            if (in_array($this->request->action, ['add', 'index'])){
                 return true;
+            }
+
+            // Le propriétaire d'un article peut l'éditer et le supprimer
+            if (in_array($this->request->action, ['edit'])) {
+                $articleId = (int)$this->request->params['pass'][0];
+                if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
+                    return true;
+                }
+                else{
+                    $this->Flash->error(__("Vous ne pouvez pas modifier cet article.", h($id)));
+                    return $this->redirect(['action' => 'index']);
+                }
             }
         }
 

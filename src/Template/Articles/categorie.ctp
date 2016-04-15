@@ -4,7 +4,7 @@
     ?>
         <div class="row">
             <div class="col-lg-12 page-title">
-                <?= h($article->title) ?>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]); ?>
             </div>
         </div>
         <div class="row">
