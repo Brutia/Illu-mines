@@ -19,13 +19,15 @@
                 <span class="input-group-addon addon-fixed-size" id="basic-addon1">Password</span>
                 <?= $this->Form->input('password', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
             </div>
-            <div class="input-group">
-                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Role</span>
-                <?= $this->Form->input('role', [
-                    'options' => ['admin' => 'Admin', 'author' => 'Author'],
-                    'label' => false, 'div' => false, 'class' => 'form-control'
-                ]) ?>
-            </div>
+            <?php if($user->role === 'admin'){ ?>
+                <div class="input-group">
+                    <span class="input-group-addon addon-fixed-size" id="basic-addon1">Role</span>
+                    <?= $this->Form->input('role', [
+                        'options' => ['admin' => 'Admin', 'author' => 'Author'],
+                        'label' => false, 'div' => false, 'class' => 'form-control'
+                    ]) ?>
+                </div>
+            <?php } ?>
             <?= $this->Form->button(__('Sauvegarder les changements'), ['class' => 'btn btn-primary']); ?>
             <?= $this->Form->end() ?>
         </div>
