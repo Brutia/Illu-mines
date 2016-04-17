@@ -59,11 +59,27 @@ echo $this->fetch('script');
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <?php 
-                  foreach( $onglets as $onglet ){
-                    echo '<li>';
-                    echo $this->Html->link($onglet->name, ['controller' => 'articles', 'action' => 'categorie', $onglet->tag]);
-                    echo '</li>';
-    
+                  foreach( $DropMenus as $tag => $menu ){
+                    if( is_array($menu) ){
+                        echo '<li>';
+                        echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' .$tag. '<span class="caret"></span></a>';  
+                        
+                        echo '<ul class="dropdown-menu">';
+                        
+                        foreach($menu as $submenu){
+                            echo '<li>';
+                            echo $this->Html->link($submenu['name'], ['controller' => 'articles', 'action' => 'categorie', $submenu['tag']]);
+                            echo '</li>';
+                        }
+                        
+                        echo '</ul>';
+                        echo '</li>';
+                    }
+                    else{
+                        echo '<li>';
+                        echo $this->Html->link($menu, ['controller' => 'articles', 'action' => 'categorie', $tag]);
+                        echo '</li>';
+                    }    
                   }
                 ?>
                   

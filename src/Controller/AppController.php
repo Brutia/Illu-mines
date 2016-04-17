@@ -77,7 +77,15 @@ class AppController extends Controller
         $onglets = $this->Onglets->find('all');
         $user = $this->Auth->user();
         
-        $this->set(compact('user', 'onglets'));
+        foreach($onglets as $onglet){
+            if( isset($onglet->menu) && ($onglet->menu != null) ){
+               $DropMenus[$onglet->menu][] = ['tag' => $onglet->tag, 'name' => $onglet->name];
+            }
+            else
+                $DropMenus[$onglet->tag] = $onglet->name;
+        }
+        
+        $this->set(compact('user', 'DropMenus'));
     }
     
     public function isAuthorized($user)

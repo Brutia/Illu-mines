@@ -19,6 +19,17 @@
                 <span class="input-group-addon addon-fixed-size" id="basic-addon1">Tag</span>
                 <?= $this->Form->input('tag', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
             </div>
+            <div class="input-group">
+                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Menu</span>
+                <?= $this->Form->input('menu', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 info">
+                    Rentrez ici le nom du menu dropdown dans lequel se trouve votre onglet.
+                    Si vous laissez vide, l'onglet apparaîtra directement dans la barre de navigation.
+                </div>
+            </div>
+            
             <?= $this->Form->button(__('Sauvegarder l\'onglet'), ['class' => 'btn btn-primary']); ?>
             <?= $this->Form->end() ?>
         </div>

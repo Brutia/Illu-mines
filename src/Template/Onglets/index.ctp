@@ -21,6 +21,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Tag</th>
+                    <th>Menu</th>
                     <th>Action</th>
                 </tr>
 
@@ -34,6 +35,9 @@
                     </td>
                     <td>
                         <?= $onglet->tag ?>
+                    </td>
+                    <td>
+                        <?= $onglet->menu ?>
                     </td>
                     <td>
                         <div class="btn-group">
