@@ -19,11 +19,7 @@ class ArticlesTable extends Table
             ->notEmpty('title')
             ->requirePresence('title')
             ->notEmpty('body')
-            ->requirePresence('body')
-            ->add('categorie', 'inList', [
-                'rule' => ['inList', ['fdls', 'tap']],
-                'message' => 'Merci de rentrer une categorie valide'
-            ]);
+            ->requirePresence('body');
 
         return $validator;
     }

@@ -58,8 +58,21 @@ echo $this->fetch('script');
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li><?= $this->Html->link('Fête de la science', ['controller' => 'articles', 'action' => 'categorie', 'fdls']) ?></li>
-                <li><?= $this->Html->link('TAP', ['controller' => 'articles', 'action' => 'categorie', 'tap']) ?></li>
+                <?php 
+                  foreach( $onglets as $onglet ){
+                    echo '<li>';
+                    echo $this->Html->link($onglet->name, ['controller' => 'articles', 'action' => 'categorie', $onglet->tag]);
+                    echo '</li>';
+    
+                  }
+                ?>
+                  
+                <li>
+                <?php if( $user['role'] == 'admin' ){ ?>
+                  <?= $this->Html->link('Ajouter un onglet', ['controller' => 'onglets', 'action' => 'add']) ?>
+                <?php } ?>
+                </li>
+                  
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   <li>
@@ -81,17 +94,21 @@ echo $this->fetch('script');
                           </ul>
                       </li>
                     <?php
-                          if($role == 'admin' || 'author'){
+                          if($user['role'] == 'admin' || 'author'){
                     ?>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration du site<span class="caret"></span></a>
                                   <ul class="dropdown-menu">
-                                    <li>
                                         <?php
-                                            if($role == 'admin')
+                                            if($user['role'] == 'admin'){
+                                                echo '<li>';
                                                 echo $this->Html->link('Voir les utilisateurs', ['controller' => 'users', 'action' => 'index']); 
+                                                echo '</li>';
+                                                echo '<li>';
+                                                echo $this->Html->link('Voir les onglets', ['controller' => 'onglets', 'action' => 'index']);
+                                                echo '</li>';
+                                            }
                                         ?>
-                                    </li>
                                     <li>
                                         <?= $this->Html->link('Voir les articles', ['controller' => 'articles', 'action' => 'index']); ?>
                                     </li>

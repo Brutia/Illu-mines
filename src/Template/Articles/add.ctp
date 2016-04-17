@@ -18,7 +18,7 @@
             <div class="input-group">
                 <span class="input-group-addon addon-fixed-size" id="basic-addon1">Categorie</span>
                 <?= $this->Form->input('categorie', [
-                    'options' => ['fdls' => 'Fête de la science', 'tap' => 'TAP'],
+                    'options' => $ongletsA,
                     'label' => false, 'div' => false, 'class' => 'form-control'
                 ]) ?>
             </div>

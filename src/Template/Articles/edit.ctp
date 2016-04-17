@@ -16,6 +16,13 @@
                 <?= $this->Form->input('title', ['label' => false, 'div' => false, 'class' => 'form-control']) ?>
             </div>
             <div class="input-group">
+                <span class="input-group-addon addon-fixed-size" id="basic-addon1">Categorie</span>
+                <?= $this->Form->input('categorie', [
+                    'options' => $ongletsA,
+                    'label' => false, 'div' => false, 'class' => 'form-control'
+                ]) ?>
+            </div>
+            <div class="input-group">
                 <!-- <span class="input-group-addon addon-fixed-size" id="basic-addon1">Content</span> -->
                 <?= $this->Form->input('body', ['label' => false, 'div' => false, 'class' => 'form-control', 'rows' => '60', 'id' => 'body']) ?>
             </div>

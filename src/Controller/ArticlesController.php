@@ -17,6 +17,7 @@ class ArticlesController extends AppController
 	public function beforeFilter(Event $event){
         parent::beforeFilter($event);
 		$this->LoadModel('Users');
+		$this->LoadModel('Onglets');
 	}
     
     public function index()
@@ -44,6 +45,12 @@ class ArticlesController extends AppController
     public function add()
     {
         $article = $this->Articles->newEntity();
+        $onglets = $this->Onglets->find('all');
+        
+        foreach($onglets as $onglet){
+            $ongletsA[$onglet->tag] = $onglet->name;
+        }
+        
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->data);
             
@@ -55,14 +62,20 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('Impossible d\'ajouter votre article.'));
         }
-        $this->set('article', $article);
+        $this->set(compact('article', 'ongletsA'));
     }
     
     // src/Controller/ArticlesController.php
     public function edit($id = null)
     {
         $this->isAuthorized($this->Auth->user());
+        
         $article = $this->Articles->get($id);
+        $onglets = $this->Onglets->find('all');
+        
+        foreach($onglets as $onglet){
+            $ongletsA[$onglet->tag] = $onglet->name;
+        }
         
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
@@ -73,7 +86,7 @@ class ArticlesController extends AppController
             $this->Flash->error(__('Impossible de mettre à jour votre article.'));
         }
 
-        $this->set('article', $article);
+        $this->set(compact('article', 'ongletsA'));
     }
     
     public function categorie($cat){
@@ -88,17 +101,12 @@ class ArticlesController extends AppController
     // src/Controller/ArticlesController.php
     public function delete($id)
     {
-        //$this->isAuthorized($this->Auth->user());
+        $this->isAuthorized($this->Auth->user());
         
-        if( isset($user['role']) && in_array($user['role'], ['admin']) ){
-            $article = $this->Articles->get($id);
-            if ($this->Articles->delete($article)) {
-                $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
-                return $this->redirect(['action' => 'index']);
-            }
-        }
-        else{
-            $this->Flash->error(__("Vous ne pouvez pas supprimer cet article.", h($id)));
+        
+        $article = $this->Articles->get($id);
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }
