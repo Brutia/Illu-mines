@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Static content controller
@@ -37,6 +38,13 @@ class PagesController extends AppController
      */
     public function display()
     {
+        $this->LoadModel('Articles');
+        $articles = $this->Articles->find('all', [
+            'order' => ['created' => 'DESC']
+        ]);
+        
+        $this->set('lastArticle', $articles->first());
+        
         $path = func_get_args();
 
         $count = count($path);
@@ -62,5 +70,7 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
+        
+        
     }
 }

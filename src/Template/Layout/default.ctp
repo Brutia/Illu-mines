@@ -26,6 +26,7 @@
 echo $this->Html->css('bootstrap.min.css');
 echo $this->Html->css("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css");
 echo $this->Html->css("style.css");
+echo $this->Html->css("illu-mines.css");
     
 echo $this->fetch('meta');
 echo $this->fetch('css');
@@ -84,9 +85,12 @@ echo $this->fetch('script');
                 ?>
                   
                 <li>
-                <?php if( $user['role'] == 'admin' ){ ?>
-                  <?= $this->Html->link('Ajouter un onglet', ['controller' => 'onglets', 'action' => 'add']) ?>
-                <?php } ?>
+                <?php 
+                if( $user['role'] == 'admin' ){ 
+                   echo $this->Html->link('', ['controller' => 'onglets', 'action' => 'add'],
+                                                ['title' => 'Ajouter un onglet', 'class' => 'fa fa-plus']);
+                    
+                 } ?>
                 </li>
                   
               </ul>
@@ -113,7 +117,7 @@ echo $this->fetch('script');
                           if($user['role'] == 'admin' || 'author'){
                     ?>
                               <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration du site<span class="caret"></span></a>
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-cog fa-spin"></span><span class="caret"></span></a>
                                   <ul class="dropdown-menu">
                                         <?php
                                             if($user['role'] == 'admin'){

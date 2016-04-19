@@ -28,7 +28,8 @@ $this->layout = "default";
     <div class="row welcome">
         <div class="col-lg-12 text-center" style="position: relative">
             <p>Bienvenue sur le site d'<span class="name-asso">Illu-Mines</span></p>
-            <?= $this->Html->image('logo.png', ['class' => 'img img-responsive logo hidden-xs']) ?>
+            <?= $this->Html->image('logo.png', ['class' => 'img img-responsive logo hidden-xs',
+                                               'style' => 'left: 0']) ?>
             <?= $this->Html->image('logo.png', ['class' => 'img img-responsive logo hidden-xs',
                                                 'style' => 'right: 0']) ?>
         </div>
@@ -40,13 +41,13 @@ $this->layout = "default";
     
     <div class="row presentation">
         <div class="col-lg-12">
+            
             <div class="row">
                 <div class="col-lg-12 title">
                     Petite présentation de l'association
                 </div>
             </div>
-        </div>
-        <div class="col-lg-12">
+            
             <div class="row">
                 <div class="col-lg-12 text-justify">
         Illu-Mines est une association de loi 1901 ayant pour objectif le partage et la diffusion de la culture scientifique pour petits et grands. Créée en 2007, l'association Illu-Mines met en place des ateliers simples et ludiques pour faire des enfants de petits chercheurs en herbes !
@@ -56,6 +57,36 @@ $this->layout = "default";
         Nous intervenons régulièrement dans les classes pour animer des temps d’activités périscolaires et nous organisons également des évènements grand public avec nos partenaires, comme la fête de la science.                
                 </div>
             </div>
+            
         </div>        
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <div class="row">
+                <div class="col-lg-12 title">
+                    Dernier article mis en ligne
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12 page-title">
+                    <?= $this->Html->link($lastArticle['title'], ['controller' => 'articles', 'action' => 'view', $lastArticle->id]); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 date">
+                    <?= $lastArticle['created']->format('F jS, Y') ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 article">
+                    <?php echo $this->BBCode->render($lastArticle['body']); ?>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>

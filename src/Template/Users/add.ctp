@@ -26,6 +26,13 @@
                     'label' => false, 'div' => false, 'class' => 'form-control'
                 ]) ?>
             </div>
+            <div class="row">
+                <div class="col-lg-12 info">
+                    Les différents rôles :<br>
+                    - admin : peut tout gérer<br>
+                    - author : peut créer des articles et modifier ses propres articles
+                </div>
+            </div>
             <?= $this->Form->button(__('Ajouter'), ['class' => 'btn btn-primary']); ?>
             <?= $this->Form->end() ?>
         </div>
