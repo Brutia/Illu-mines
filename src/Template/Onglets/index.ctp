@@ -16,7 +16,7 @@
     <?php  ?>
     <div class="row">
         <div class="col-lg-12">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>Id</th>
                     <th>Name</th>

@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 info">
-                    La catégorie de l'article permet de savoir dans quel onglet il apparaîtra.
+                    La catégorie de l'article permet de savoir dans quel onglet il apparaîtra. Vous pouvez choisir "non affiché" si vous ne voulez pas le mettre en ligne tout de suite.
                 </div>
             </div>
             

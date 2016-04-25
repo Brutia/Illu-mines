@@ -10,13 +10,42 @@
     
     <div class="row btn-line">
         <div class="col-lg-12">
-            <?= $this->Html->link('Ajouter un article', ['action' => 'add'], ['class' => 'btn btn-default']) ?>
+            <div class="btn-group">
+                <?= $this->Html->link('Ajouter un article', ['action' => 'add'], ['class' => 'btn btn-default']) ?>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?php 
+                        if(isset($cat) && $cat != null)
+                            echo $ongletsA[$cat]; 
+                        else
+                            echo 'Catégorie';
+                        ?>
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <?php
+                        foreach($ongletsA as $tag => $onglet){
+                            echo '<li>';
+                            echo $this->Html->link($onglet, ['action' => 'index', $tag]);
+                            echo '</li>';
+                        }
+                        echo '<li>';
+                        echo $this->Html->link('Tous les articles', ['action' => 'index', null]);
+                        echo '</li>';
+                        ?>
+                      
+                    </ul>
+                  </div>
+                
+            </div>
         </div>
     </div>
     <?php  ?>
+    
     <div class="row">
         <div class="col-lg-12">
-            <table class="table table-striped">
+            <table class="table">
                 <tr>
                     <th>Id</th>
                     <th>Title</th>

@@ -22,9 +22,14 @@
     background-color: rgb(151,4,4);
 }
 
-.dropdown-menu > li > a,
-.dropdown-menu > li > a:hover{
+.navbar-nav .dropdown-menu > li > a,
+.navbar-nav .dropdown-menu > li > a:hover{
     color: rgb(151,4,4);
+}
+
+.btn-line .dropdown-menu > li > a,
+.btn-line .dropdown-menu > li > a:hover{
+    font-size: 14px;
 }
 
 .footer{

@@ -117,7 +117,7 @@ echo $this->fetch('script');
                           if($user['role'] == 'admin' || 'author'){
                     ?>
                               <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-cog fa-spin"></span><span class="caret"></span></a>
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-cog"></span><span class="caret"></span></a>
                                   <ul class="dropdown-menu">
                                         <?php
                                             if($user['role'] == 'admin'){

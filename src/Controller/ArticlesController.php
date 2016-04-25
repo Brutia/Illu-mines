@@ -20,18 +20,31 @@ class ArticlesController extends AppController
 		$this->LoadModel('Onglets');
 	}
     
-    public function index()
+    public function index($cat = null)
     {
         $this->isAuthorized($this->Auth->user());
         
-        $articles = $this->Articles->find('all');
-        $users = $this->Users->find('all');
+        if($cat != null){
+            $articles = $this->Articles->find('all')
+                ->where(['Articles.categorie' => $cat]);
+        }
+        else
+            $articles = $this->Articles->find('all');
+        
+        $users = $this->Users->find('all'); 
+        
+        $onglets = $this->Onglets->find('all');
+        
+        foreach($onglets as $onglet){
+            $ongletsA[$onglet->tag] = $onglet->name;
+        }
+        $ongletsA['notDisplayed'] = 'Non affiché';
         
         foreach($users as $user){
             $usernameList[$user->id] = $user->username;
         }
         
-        $this->set(compact('articles', 'usernameList'));
+        $this->set(compact('articles', 'usernameList', 'ongletsA', 'cat'));
     }
     
     public function view($id = null)
@@ -50,6 +63,7 @@ class ArticlesController extends AppController
         foreach($onglets as $onglet){
             $ongletsA[$onglet->tag] = $onglet->name;
         }
+        $ongletsA['notDisplayed'] = 'Non affiché';
         
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->data);
@@ -76,6 +90,7 @@ class ArticlesController extends AppController
         foreach($onglets as $onglet){
             $ongletsA[$onglet->tag] = $onglet->name;
         }
+        $ongletsA['notDisplayed'] = 'Ne pas l\'afficher';
         
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
