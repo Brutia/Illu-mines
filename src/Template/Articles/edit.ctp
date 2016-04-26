@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('body', {
         height: 450,
