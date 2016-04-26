@@ -104,3 +104,34 @@ body{
 .dropdown-menu > li > a:hover{
     font-size: 20px;
 }
+
+.img-info, .url{
+    color: #909090;
+}
+
+.btn-delete a{
+    color: #e0e0e0;
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    background-color: rgba(0,0,0,0.5);
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.btn-delete a:hover{
+    text-decoration: none;
+    color: #505050;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.album{
+    background-color: #f5f5f5;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 5px #a0a0a0 inset;
+}
+
+.album-name{
+    font-size: 20px;
+    margin-top: 10px;
+}

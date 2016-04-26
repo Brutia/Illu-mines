@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Application Controller
@@ -72,9 +73,20 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'view', 'display', 'categorie']);
+        
+        $connection = ConnectionManager::get('default');
         $this->LoadModel('Onglets');
+        $this->LoadModel('Images');
+        $this->LoadModel('Albums');
         
         $onglets = $this->Onglets->find('all');
+        $albums = $this->Albums->find('all');
+        
+        $carrousselImages = $connection
+            ->execute('SELECT I.name FROM images I, albums A WHERE I.id_album = A.id AND A.tag = :tag',
+                     ['tag' => 'carroussel'])
+            ->fetchAll('assoc');
+        
         $user = $this->Auth->user();
         
         foreach($onglets as $onglet){
@@ -85,7 +97,7 @@ class AppController extends Controller
                 $DropMenus[$onglet->tag] = $onglet->name;
         }
         
-        $this->set(compact('user', 'DropMenus'));
+        $this->set(compact('user', 'DropMenus', 'carrousselImages', 'albums'));
     }
     
     public function isAuthorized($user)

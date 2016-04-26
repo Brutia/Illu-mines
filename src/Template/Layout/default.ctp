@@ -25,6 +25,7 @@
     
 echo $this->Html->css('bootstrap.min.css');
 echo $this->Html->css("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css");
+echo $this->Html->css("fileinput.min.css");
 echo $this->Html->css("style.css");
 echo $this->Html->css("illu-mines.css");
     
@@ -85,6 +86,22 @@ echo $this->fetch('script');
                 ?>
                   
                 <li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Les albums <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <?php
+                          foreach($albums as $album){
+                              if($album->tag != 'carroussel'){
+                                  echo '<li>';
+                                  echo $this->Html->link($album->name, ['controller' => 'albums', 'action' => 'display', $album->id]);
+                                  echo '</li>';
+                              }
+                          }
+                          ?>
+                      </ul>
+                </li>
+                  
+                <li>
                 <?php 
                 if( $user['role'] == 'admin' ){ 
                    echo $this->Html->link('', ['controller' => 'onglets', 'action' => 'add'],
@@ -131,6 +148,9 @@ echo $this->fetch('script');
                                         ?>
                                     <li>
                                         <?= $this->Html->link('Voir les articles', ['controller' => 'articles', 'action' => 'index']); ?>
+                                    </li>
+                                    <li>
+                                        <?= $this->Html->link('Voir les albums', ['controller' => 'albums', 'action' => 'index']); ?>
                                     </li>
                                   </ul>
                               </li>
@@ -194,6 +214,7 @@ echo $this->fetch('script');
         <?= $this->Html->script("jquery.min.js") ?>
         <?= $this->Html->script("bootstrap.min.js") ?>
         <?= $this->Html->script("jquery-ui.min.js") ?>
+        <?= $this->Html->script("fileinput.min.js") ?>
         <?= $this->Html->script("site.js") ?>
     </body>
 
