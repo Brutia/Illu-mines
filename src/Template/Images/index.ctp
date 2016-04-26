@@ -28,7 +28,8 @@
                     <div class="col-lg-3">
                         <div class="thumbnail">
                 
-                            <?= $this->Html->image($image['name'], ['class' => 'img img-responsive']) ?>
+                            <?= $this->Html->image($image['name'], ['class' => 'img img-responsive',
+                                                            'url' => '/img/'. $image['name']]) ?>
                             
                             <div class="caption">
                                 <div class="row img-info">
