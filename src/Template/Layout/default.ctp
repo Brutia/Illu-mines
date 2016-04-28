@@ -22,20 +22,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
-    
+
 echo $this->Html->css('bootstrap.min.css');
 echo $this->Html->css("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css");
 echo $this->Html->css("fileinput.min.css");
 echo $this->Html->css("style.css");
 echo $this->Html->css("illu-mines.css");
-    
+
 echo $this->fetch('meta');
 echo $this->fetch('css');
 echo $this->fetch('script');
 ?>
 <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
-    
+
 </head>
     <body>
         <?= $this->Flash->render() ?>
@@ -52,28 +52,28 @@ echo $this->fetch('script');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-                <?php 
-                echo $this->Html->link('Illu-Mines', '/', array('class' => 'navbar-brand')); 
+                <?php
+                echo $this->Html->link('Illu-Mines', '/', array('class' => 'navbar-brand'));
                 ?>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <?php 
+                <?php
                   foreach( $DropMenus as $tag => $menu ){
                     if( is_array($menu) ){
                         echo '<li>';
-                        echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' .$tag. '<span class="caret"></span></a>';  
-                        
+                        echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' .$tag. '<span class="caret"></span></a>';
+
                         echo '<ul class="dropdown-menu">';
-                        
+
                         foreach($menu as $submenu){
                             echo '<li>';
                             echo $this->Html->link($submenu['name'], ['controller' => 'articles', 'action' => 'categorie', $submenu['tag']]);
                             echo '</li>';
                         }
-                        
+
                         echo '</ul>';
                         echo '</li>';
                     }
@@ -81,10 +81,10 @@ echo $this->fetch('script');
                         echo '<li>';
                         echo $this->Html->link($menu, ['controller' => 'articles', 'action' => 'categorie', $tag]);
                         echo '</li>';
-                    }    
+                    }
                   }
                 ?>
-                  
+
                 <li>
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Les albums <span class="caret"></span></a>
@@ -100,27 +100,27 @@ echo $this->fetch('script');
                           ?>
                       </ul>
                 </li>
-                  
+
                 <li>
-                <?php 
-                if( $user['role'] == 'admin' ){ 
+                <?php
+                if( $user['role'] == 'admin' ){
                    echo $this->Html->link('', ['controller' => 'onglets', 'action' => 'add'],
                                                 ['title' => 'Ajouter un onglet', 'class' => 'fa fa-plus']);
-                    
+
                  } ?>
                 </li>
-                  
+
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   <li>
-                    <?php 
+                    <?php
                       if ($this->request->session()->read('Auth.User')){
                     ?>
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $user['username'] ?> <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li>
-                                <?= $this->Html->link('Modifier mon compte', ['controller' => 'users', 
+                                <?= $this->Html->link('Modifier mon compte', ['controller' => 'users',
                                                                               'action' => 'edit',
                                                                               $user['id']
                                                                              ]); ?>
@@ -139,7 +139,7 @@ echo $this->fetch('script');
                                         <?php
                                             if($user['role'] == 'admin'){
                                                 echo '<li>';
-                                                echo $this->Html->link('Voir les utilisateurs', ['controller' => 'users', 'action' => 'index']); 
+                                                echo $this->Html->link('Voir les utilisateurs', ['controller' => 'users', 'action' => 'index']);
                                                 echo '</li>';
                                                 echo '<li>';
                                                 echo $this->Html->link('Voir les onglets', ['controller' => 'onglets', 'action' => 'index']);
@@ -154,11 +154,11 @@ echo $this->fetch('script');
                                     </li>
                                   </ul>
                               </li>
-                    <?php    
+                    <?php
                           }
-                      }                        
+                      }
                       else
-                        echo $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']); 
+                        echo $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login']);
                     ?>
                   </li>
               </ul>
@@ -173,7 +173,7 @@ echo $this->fetch('script');
         <div class="footer">
             <div class="container">
                 <div class="row">
-                    
+
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-12">
@@ -191,7 +191,7 @@ echo $this->fetch('script');
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-12 text-center">
@@ -199,7 +199,7 @@ echo $this->fetch('script');
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-12 text-center">
@@ -216,6 +216,16 @@ echo $this->fetch('script');
         <?= $this->Html->script("jquery-ui.min.js") ?>
         <?= $this->Html->script("fileinput.min.js") ?>
         <?= $this->Html->script("site.js") ?>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-77083535-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </body>
 
 </html>
