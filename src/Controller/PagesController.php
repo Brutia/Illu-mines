@@ -42,9 +42,16 @@ class PagesController extends AppController
         $articles = $this->Articles->find('all', [
             'order' => ['created' => 'DESC']
         ]);
-        
+
+        $connection = ConnectionManager::get('default');
+        $articleImages = $connection
+            ->execute('SELECT I.name FROM images I WHERE I.id_album = :id',
+                     ['id' => $articles->first()->album_id])
+            ->fetchAll('assoc');
+
         $this->set('lastArticle', $articles->first());
-        
+        $this->set('articleImages', $articleImages);
+
         $path = func_get_args();
 
         $count = count($path);
@@ -59,7 +66,7 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        
+
         $this->set(compact('page', 'subpage'));
 
         try {
@@ -70,7 +77,7 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
-        
-        
+
+
     }
 }

@@ -37,11 +37,11 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
-     */    
+     */
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'loginRedirect' => [
@@ -69,26 +69,26 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
-    
+
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'view', 'display', 'categorie']);
-        
+
         $connection = ConnectionManager::get('default');
         $this->LoadModel('Onglets');
         $this->LoadModel('Images');
         $this->LoadModel('Albums');
-        
+
         $onglets = $this->Onglets->find('all');
         $albums = $this->Albums->find('all');
-        
+
         $carrousselImages = $connection
             ->execute('SELECT I.name FROM images I, albums A WHERE I.id_album = A.id AND A.tag = :tag',
                      ['tag' => 'carroussel'])
             ->fetchAll('assoc');
-        
+
         $user = $this->Auth->user();
-        
+
         foreach($onglets as $onglet){
             if( isset($onglet->menu) && ($onglet->menu != null) ){
                $DropMenus[$onglet->menu][] = ['tag' => $onglet->tag, 'name' => $onglet->name];
@@ -96,10 +96,10 @@ class AppController extends Controller
             else
                 $DropMenus[$onglet->tag] = $onglet->name;
         }
-        
+
         $this->set(compact('user', 'DropMenus', 'carrousselImages', 'albums'));
     }
-    
+
     public function isAuthorized($user)
     {
         // Admin peuvent accéder à chaque action

@@ -34,48 +34,48 @@ $this->layout = "default";
                                                 'style' => 'right: 0']) ?>
         </div>
     </div>
-    
+
     <div class="row">
         <?= $this->element('carroussel'); ?>
     </div>
-    
+
     <div class="row presentation">
         <div class="col-lg-12">
-            
+
             <div class="row">
                 <div class="col-lg-12 title">
                     Petite présentation de l'association
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12 text-justify">
         Illu-Mines est une association de loi 1901 ayant pour objectif le partage et la diffusion de la culture scientifique pour petits et grands. Créée en 2007, l'association Illu-Mines met en place des ateliers simples et ludiques pour faire des enfants de petits chercheurs en herbes !
         <br>
         Association d'élèves ingénieurs de l'école des Mines de Saint-Etienne du campus Charpak Provence situé à Gardanne, elle compte aujourd'hui une soixantaine d’étudiants motivés pour transmettre les sciences sur le principe de la main à la pâte. Nos animateurs sont des scientifiques bénévoles, ayant reçu une formation de base à l’animation et à la vulgarisation scientifique.
         <br>
-        Nous intervenons régulièrement dans les classes pour animer des temps d’activités périscolaires et nous organisons également des évènements grand public avec nos partenaires, comme la fête de la science.                
+        Nous intervenons régulièrement dans les classes pour animer des temps d’activités périscolaires et nous organisons également des évènements grand public avec nos partenaires, comme la fête de la science.
                 </div>
             </div>
-            
-        </div>        
+
+        </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-12">
-            
+
             <div class="row">
                 <div class="col-lg-12 title">
                     Dernier article mis en ligne
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12 page-title">
                     <?= $this->Html->link($lastArticle['title'], ['controller' => 'articles', 'action' => 'view', $lastArticle->id]); ?>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-3 date">
                     <?= $lastArticle['created']->format('F jS, Y') ?>
@@ -84,9 +84,54 @@ $this->layout = "default";
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 article">
                     <?php echo $this->BBCode->render($lastArticle['body']); ?>
+
+                    <?php
+                          if(sizeof($articleImages) > 0){
+
+                            echo '<div id="articleCarousel" class="carousel slide" data-ride="carousel">';
+
+                            echo '<ol class="carousel-indicators">';
+                                for($i = 0; $i < sizeof($articleImages); $i++){
+                                    if($i == 0)
+                                        echo '<li data-target="#articleCarousel" data-slide-to="'. $i .'" class="active"></li>';
+                                    else {
+                                        echo '<li data-target="#articleCarousel" data-slide-to="'. $i .'"></li>';
+                                    }
+                                }
+                            echo '</ol>';
+
+                            echo '<div class="carousel-inner" role="listbox">';
+
+                              foreach($articleImages as $key => $image){
+                                  if($key == 0){
+                                      echo '<div class="item active">';
+                                      echo $this->Html->image($image['name'], ['style' => 'width: 100%']);
+                                      echo '</div>';
+                                  }
+                                  else{
+                                      echo '<div class="item">';
+                                      echo $this->Html->image($image['name'], ['style' => 'width: 100%']);
+                                      echo '</div>';
+                                  }
+                              }
+
+
+                            echo '</div>';
+                            echo '<a class="left carousel-control" href="#articleCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                  </a>
+                                  <a class="right carousel-control" href="#articleCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                  </a>
+                            </div>';
+
+                          }
+                    ?>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

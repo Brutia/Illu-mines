@@ -7,7 +7,7 @@
             <p>Tous les articles du site</p>
         </div>
     </div>
-    
+
     <div class="row btn-line">
         <div class="col-lg-12">
             <div class="btn-group">
@@ -15,9 +15,9 @@
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?php 
+                      <?php
                         if(isset($cat) && $cat != null)
-                            echo $ongletsA[$cat]; 
+                            echo $ongletsA[$cat];
                         else
                             echo 'Catégorie';
                         ?>
@@ -34,15 +34,15 @@
                         echo $this->Html->link('Tous les articles', ['action' => 'index', null]);
                         echo '</li>';
                         ?>
-                      
+
                     </ul>
                   </div>
-                
+
             </div>
         </div>
     </div>
     <?php  ?>
-    
+
     <div class="row">
         <div class="col-lg-12">
             <table class="table">
@@ -52,6 +52,7 @@
                     <th>Created</th>
                     <th>Author</th>
                     <th>Categorie</th>
+                    <th>Album</th>
                     <th>Action</th>
                 </tr>
 
@@ -72,6 +73,8 @@
                     <td>
                         <?= $article->categorie ?>
                     </td>
+                    <td>
+                        <?= $albumsA[$article->album_id] ?>
                     </td>
                     <td>
                         <div class="btn-group">
@@ -80,7 +83,7 @@
                                 ['action' => 'delete', $article->id],
                                 ['class' => 'btn btn-default'])
                             ?>
-                            <?= $this->Html->link('Modifier',   ['action' => 'edit', $article->id], 
+                            <?= $this->Html->link('Modifier',   ['action' => 'edit', $article->id],
                                                                 ['class' => 'btn btn-default']) ?>
                         </div>
                     </td>
