@@ -134,7 +134,16 @@ class ArticlesController extends AppController
 
         $articles = $query->all();
 
-        $this->set('articles', $articles);
+        $connection = ConnectionManager::get('default');
+        foreach($articles as $article){
+            $articleImages = $connection
+                ->execute('SELECT I.name FROM images I WHERE I.id_album = :id',
+                         ['id' => $article->album_id])
+                ->fetchAll('assoc');
+            $articlesImages[$article->id] = $articleImages;
+        }
+
+        $this->set(compact('articles', 'articlesImages'));
     }
 
     // src/Controller/ArticlesController.php
