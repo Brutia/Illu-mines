@@ -57,7 +57,7 @@ class ImagesController extends AppController
             $ext_availables = ['png', 'jpg', 'jpeg', 'gif'];
             $id_album = $this->request->data['id_album'];
             $images = $this->request->data['images'];
-            print_r($images);
+            
             
             foreach($images as $image_up)
             {              
