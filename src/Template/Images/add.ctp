@@ -22,7 +22,7 @@
             
             <?= $this->Form->input('image', [
                     'type' => 'file',
-                    'label' => false, 'div' => false, 'class' => 'file'
+                    'label' => false, 'div' => false, 'class' => 'file', 'multiple' => 'multiple', 'name' => 'images[]'
 ]); ?>
             <div class="row">
                 <div class="col-lg-12 info">

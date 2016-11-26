@@ -215,7 +215,7 @@ echo $this->fetch('script');
         <?= $this->Html->script("bootstrap.min.js") ?>
         <?= $this->Html->script("jquery-ui.min.js") ?>
         <?= $this->Html->script("fileinput.min.js") ?>
-        <?= $this->Html->script("site.js") ?>
+        <!-- $this->Html->script("site.js") -->
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

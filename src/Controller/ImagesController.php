@@ -54,22 +54,45 @@ class ImagesController extends AppController
         $albumsA[0] = 'Aucun album';
         
         if ($this->request->is('post')) {
-            
-            $image->id_album = $this->request->data['id_album'];
-            $image->name = $this->request->data['image']['name'];
-            
-            $extension=strrchr($this->request->data['image']['name'],'.');
-            $extension=substr($extension,1);    
             $ext_availables = ['png', 'jpg', 'jpeg', 'gif'];
+            $id_album = $this->request->data['id_album'];
+            $images = $this->request->data['images'];
+            print_r($images);
             
-            if(in_array($extension, $ext_availables)){
-                if ($this->Images->save($image)){
-                    move_uploaded_file($this->request->data['image']['tmp_name'], 'img/' . $this->request->data['image']['name']);
-                    $this->Flash->success(__('Votre image a été sauvegardée.'));
-                    return $this->redirect(['action' => 'index']);
+            foreach($images as $image_up)
+            {              
+                $image = $this->Images->newEntity();
+                
+                $image->id_album = $id_album;
+                $image->name = $image_up['name'];
+                
+                $extension=strrchr($image_up['name'],'.');
+                $extension=substr($extension,1);    
+                
+                if(in_array($extension, $ext_availables)){
+                    if ($this->Images->save($image)){
+                        move_uploaded_file($image_up['tmp_name'], 'img/' . $image_up['name']);
+                        $this->Flash->success(__('Votre image a été sauvegardée.'));
+                        //return $this->redirect(['action' => 'index']);
+                    }
                 }
+                else
+                    $this->Flash->error(__('Impossible d\'ajouter votre image.'));
             }
-            $this->Flash->error(__('Impossible d\'ajouter votre image.'));
+            //$image->id_album = $this->request->data['id_album'];
+            //$image->name = $this->request->data['image']['name'];
+            
+            //$extension=strrchr($this->request->data['image']['name'],'.');
+            //$extension=substr($extension,1);    
+            //$ext_availables = ['png', 'jpg', 'jpeg', 'gif'];
+            
+            //if(in_array($extension, $ext_availables)){
+            //    if ($this->Images->save($image)){
+            //        move_uploaded_file($this->request->data['image']['tmp_name'], 'img/' . $this->request->data['image']['name']);
+            //        $this->Flash->success(__('Votre image a été sauvegardée.'));
+                    //return $this->redirect(['action' => 'index']);
+            //    }
+            //}
         }
         
         $this->set(compact('albumsA', 'image'));
