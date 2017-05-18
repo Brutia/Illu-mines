@@ -136,3 +136,8 @@ body{
     font-size: 20px;
     margin-top: 10px;
 }
+
+@font-face {
+	font-family: "Pokemon";
+	src: url('../fonts/pokemonsolid.ttf');
+}

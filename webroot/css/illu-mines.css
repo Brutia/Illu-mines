@@ -3,7 +3,10 @@
 }
 
 .navbar-brand{
-    font-family: 'Bangers', 'Abel', sans-serif;
+    /* font-family: 'Bangers', 'Abel', sans-serif; */
+	font-family: "Pokemon";
+	font-style: normal;
+	font-weight: normal;
 }
 
 .navbar-default .navbar-brand,

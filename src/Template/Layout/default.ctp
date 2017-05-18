@@ -182,7 +182,7 @@ echo $this->fetch('script');
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <p><i class="fa fa-phone"></i> 06 13 69 47 39</p>
+                                <p><i class="fa fa-phone"></i> 07 68 29 38 29</p>
                             </div>
                         </div>
                         <div class="row">
